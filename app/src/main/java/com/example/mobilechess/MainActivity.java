@@ -17,13 +17,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        chessBoard = new ChessBoard(this);
-        layout = new RelativeLayout(this);
-
-        layout.addView(chessBoard);
-        //setContentView(R.layout.activity_main);
-        setContentView(layout);
+//        chessBoard = new ChessBoard(this);
+//        layout = new RelativeLayout(this);
+//
+//        layout.addView(chessBoard);
+//        setContentView(layout);
     }
 
     public void startGame(View v){
