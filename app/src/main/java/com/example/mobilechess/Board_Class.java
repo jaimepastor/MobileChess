@@ -74,7 +74,7 @@ public class Board_Class   {		//Board class
 				
 				return array_2d_piece;
 		 	}
-			 
+
 			
 		 	public void show_board(){	  //show current board function
 		 		
