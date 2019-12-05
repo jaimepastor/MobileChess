@@ -30,4 +30,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainGame.class);
         startActivity(intent);
     }
+
+    public void makeBoard(View v){
+        Intent intent = new Intent (this, MakeBoardActivity.class);
+        startActivity(intent);
+    }
 }
