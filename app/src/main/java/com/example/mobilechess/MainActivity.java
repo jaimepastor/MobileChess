@@ -3,14 +3,13 @@ package com.example.mobilechess;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    ChessBoard chessBoard;
+    ChessGame chessBoard;
     RelativeLayout layout;
 
 
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        chessBoard = new ChessBoard(this);
+        chessBoard = new ChessGame(this);
         layout = new RelativeLayout(this);
 
         layout.addView(chessBoard);
