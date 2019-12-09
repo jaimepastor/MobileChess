@@ -35,8 +35,19 @@
         android:layout_marginStart="148dp"
         android:layout_marginTop="20dp"
         android:text="Make Board"
+        android:onClick="test"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOptions"/>
 
-    
+    <TextView
+        android:id="@+id/boardPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="68dp"
+        android:text="LFKJASDLFKJDSAFLKASDJF;"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
