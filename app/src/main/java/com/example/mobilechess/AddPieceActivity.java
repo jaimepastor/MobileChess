@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class AddPieceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final int ADDED_PIECE_RESULT_CODE = 69;
-//    EditText name, location, side;
+    String piece_name, piece_location, piece_side;
     Button savePiece;
     Spinner piece_name_spinner, piece_location_spinner, piece_side_spinner;
 
@@ -23,10 +23,6 @@ public class AddPieceActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_piece);
-
-//        name = findViewById(R.id.Name);
-//        location = findViewById(R.id.Location);
-//        side = findViewById(R.id.Side);
 
         piece_name_spinner = findViewById(R.id.piece_name_spinner);
         ArrayAdapter<CharSequence> piece_name_adapter = ArrayAdapter.createFromResource(this, R.array.piece_names, android.R.layout.simple_spinner_item);
@@ -48,16 +44,11 @@ public class AddPieceActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void addPiece(View v){
-//        String pieceName = name.getText().toString();
-//        String pieceLocation = location.getText().toString();
-//        String pieceSide = side.getText().toString();
-
-//        validate(pieceName, pieceLocation, pieceSide);
 
         Intent intent = new Intent();
-//        intent.putExtra("NAME", pieceName);
-//        intent.putExtra("LOCATION", pieceLocation);
-//        intent.putExtra("SIDE", pieceSide);
+        intent.putExtra("NAME", piece_name);
+        intent.putExtra("LOCATION", piece_location);
+        intent.putExtra("SIDE", piece_side);
 
         setResult(ADDED_PIECE_RESULT_CODE, intent);
         finish();
@@ -65,7 +56,6 @@ public class AddPieceActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String piece_name, piece_location, piece_side;
         if(parent.getId() == R.id.piece_name_spinner){
             piece_name = parent.getItemAtPosition(position).toString();
             Toast.makeText(this, piece_name, Toast.LENGTH_LONG).show();

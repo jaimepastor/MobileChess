@@ -67,7 +67,7 @@ public class MakeBoardActivity extends AppCompatActivity {
         if (resultCode == ADDED_PIECE_RESULT_CODE){
 //            code to add piece details to layout
         } else {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "putragis", Toast.LENGTH_SHORT);
         }
     }
 }

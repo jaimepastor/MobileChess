@@ -14,7 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/PieceLayout"/>
+            android:id="@+id/PieceLayout">
+        </LinearLayout>
     </ScrollView>
 
     <EditText
