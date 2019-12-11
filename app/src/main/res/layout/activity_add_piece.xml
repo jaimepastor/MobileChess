@@ -6,23 +6,39 @@
     tools:context=".AddPieceActivity"
     android:orientation="vertical">
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:id="@+id/Name"
-        android:hint="Name"/>
+<!--    <EditText-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:id="@+id/Name"-->
+<!--        android:hint="Name"/>-->
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:id="@+id/Location"
-        android:hint="Location"/>
+<!--    <EditText-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:id="@+id/Location"-->
+<!--        android:hint="Location"/>-->
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:id="@+id/Side"
-        android:hint="Side"/>
+<!--    <EditText-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:id="@+id/Side"-->
+<!--        android:hint="Side"/>-->
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/piece_name_spinner"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/piece_location_spinner"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/piece_side_spinner"/>
+
 
     <Button
         android:id="@+id/addPiece"
