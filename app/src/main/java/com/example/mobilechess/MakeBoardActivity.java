@@ -15,6 +15,7 @@ import com.github.bhlangonijr.chesslib.Board;
 public class MakeBoardActivity extends AppCompatActivity {
 
     private static final int ADD_PIECE_REQUEST_CODE = 90;
+    private static final int ADDED_PIECE_RESULT_CODE = 69;
     private LinearLayout PieceLayout;
     private Board board;
     private EditText board_name;
@@ -59,6 +60,14 @@ public class MakeBoardActivity extends AppCompatActivity {
     }
 
     public void checkPiece(int resultCode, Intent data){
-//
+        String pieceName = data.getStringExtra("NAME");
+        String pieceLocation = data.getStringExtra("LOCATION");
+        String pieceSide = data.getStringExtra("SIDE");
+
+        if (resultCode == ADDED_PIECE_RESULT_CODE){
+//            code to add piece details to layout
+        } else {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT);
+        }
     }
 }

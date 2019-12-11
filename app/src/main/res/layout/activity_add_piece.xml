@@ -24,6 +24,12 @@
         android:id="@+id/Side"
         android:hint="Side"/>
 
+    <Button
+        android:id="@+id/addPiece"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Piece"
+        android:onClick="addPiece"/>
 
 
 </LinearLayout>
