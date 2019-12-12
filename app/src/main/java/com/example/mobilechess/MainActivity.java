@@ -3,7 +3,6 @@ package com.example.mobilechess;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -15,7 +14,7 @@ import com.github.bhlangonijr.chesslib.Square;
 
 public class MainActivity extends AppCompatActivity {
 
-    ChessBoard chessBoard;
+    ChessGame chessBoard;
     RelativeLayout layout;
     TextView boardPosition;
 
@@ -23,14 +22,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        boardPosition = findViewById(R.id.boardPosition);
 
-//        chessBoard = new ChessBoard(this);
-//        layout = new RelativeLayout(this);
-//
-//        layout.addView(chessBoard);
-//        setContentView(layout);
+        chessBoard = new ChessGame(this);
+        layout = new RelativeLayout(this);
+
+        layout.addView(chessBoard);
+        //setContentView(R.layout.activity_main);
+        setContentView(layout);
     }
 
     public void startGame(View v){
