@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class AddPieceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final int ADDED_PIECE_RESULT_CODE = 69;
@@ -40,9 +42,8 @@ public class AddPieceActivity extends AppCompatActivity implements AdapterView.O
         intent.putExtra("NAME", piece_name);
         intent.putExtra("LOCATION", piece_location);
         intent.putExtra("SIDE", piece_side);
-
         setResult(ADDED_PIECE_RESULT_CODE, intent);
-        finish();
+            finish();
     }
 
     @Override
