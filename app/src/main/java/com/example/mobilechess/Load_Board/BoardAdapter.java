@@ -26,6 +26,8 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardHolder> {
 
         BoardModel defaultBoard = new BoardModel("0", "Default", new Board().getFen());
         listOfBoards.add(defaultBoard);
+        notifyItemInserted(listOfBoards.size() - 1);
+
 
         db = DatabaseHelper.getInstance(context);
         Cursor res = db.getAllData();
