@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Load_Board.LoadBoardActivity"></activity>
         <activity android:name=".AddPieceActivity" />
         <activity android:name=".MakeBoardActivity" />
         <activity android:name=".MainGame" />

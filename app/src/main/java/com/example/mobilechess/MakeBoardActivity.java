@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.github.bhlangonijr.chesslib.Board;
+import com.github.bhlangonijr.chesslib.Piece;
 
 public class MakeBoardActivity extends AppCompatActivity {
 
@@ -29,6 +30,7 @@ public class MakeBoardActivity extends AppCompatActivity {
         PieceLayout = findViewById(R.id.PieceLayout);
         board = new Board();
         board_name = findViewById(R.id.board_name);
+
     }
 
     public void addPiece(View v){
@@ -53,19 +55,21 @@ public class MakeBoardActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode){
-            case ADD_PIECE_REQUEST_CODE : checkPiece(resultCode, data);
+            case ADD_PIECE_REQUEST_CODE : savePiece(resultCode, data);
                     break;
             default : Toast.makeText(this, "whatdog", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void checkPiece(int resultCode, Intent data){
+    public void savePiece(int resultCode, Intent data){
         String pieceName = data.getStringExtra("NAME");
         String pieceLocation = data.getStringExtra("LOCATION");
         String pieceSide = data.getStringExtra("SIDE");
 
+
         if (resultCode == ADDED_PIECE_RESULT_CODE){
 //            code to add piece details to layout
+
         } else {
             Toast.makeText(this, "putragis", Toast.LENGTH_SHORT);
         }

@@ -6,17 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MakeBoardActivity">
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/PieceLayout">
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/PieceLayout">
+    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
