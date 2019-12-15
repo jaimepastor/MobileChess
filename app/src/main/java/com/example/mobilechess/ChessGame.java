@@ -82,7 +82,7 @@ public class ChessGame extends SurfaceView {
         tiles[0][3] = Square.A4;
         tiles[0][4] = Square.A5;
         tiles[0][5] = Square.A6;
-        tiles[0][6] = Square.B7;
+        tiles[0][6] = Square.A7;
         tiles[0][7] = Square.A8;
         tiles[1][0] = Square.B1;
         tiles[1][1] = Square.B2;
@@ -248,12 +248,12 @@ public class ChessGame extends SurfaceView {
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN: {
-                if(event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1240){
+                if(event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1220){
                     if(touch){
                         int x1, x2 = 0, y1, y2 = 0;
                         x1 = (int) (x-20)/130;
                         y1 = (int) (y-200)/130;
-                        if (event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1240) {
+                        if (event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1220) {
                             for (int ctrx = 120; ctrx <= 1160; ctrx += width) {
                                 for (int ctry = 300; ctry <= 1340; ctry += height) {
                                     if (event.getX() <= ctrx && event.getY() <= ctry && event.getX() >= ctrx - 130 && event.getY() >= ctry - 130) {
