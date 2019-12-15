@@ -151,6 +151,7 @@ public class CreatedChessGame extends SurfaceView {
         //tempP = board.boardToArray();
 
         holder = getHolder();
+        setBackgroundColor(Color.WHITE);
 
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override

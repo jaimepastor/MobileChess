@@ -26,11 +26,10 @@ public class MakeBoardActivity extends AppCompatActivity {
     private static final int ADDED_PIECE_RESULT_CODE = 69;
     private LinearLayout PieceLayout;
     private RelativeLayout boardLayout;
-    private Board board;
     private EditText board_name;
     private Integer quantity;
     CreatedChessGame creation;
-    Board newBoard = new Board();
+    private Board newBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,8 @@ public class MakeBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_make_board);
 
         PieceLayout = findViewById(R.id.PieceLayout);
-        board = new Board();
+        newBoard = new Board();
+        newBoard.clear();
         board_name = findViewById(R.id.board_name);
         boardLayout = findViewById(R.id.boardLayout);
         creation = new CreatedChessGame(this);
@@ -67,7 +67,6 @@ public class MakeBoardActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        newBoard.clear();
         if (requestCode == ADD_PIECE_REQUEST_CODE)
         {
             if(resultCode == ADDED_PIECE_RESULT_CODE)
@@ -79,20 +78,6 @@ public class MakeBoardActivity extends AppCompatActivity {
 
                 newBoard.setPiece(Piece.valueOf(piece), Square.valueOf(location));
             }
-        }
-    }
-
-    public void savePiece(int resultCode, Intent data){
-        String pieceName = data.getStringExtra("NAME");
-        String pieceLocation = data.getStringExtra("LOCATION");
-
-
-
-        if (resultCode == ADDED_PIECE_RESULT_CODE){
-//            code to add piece details to layout
-
-        } else {
-            Toast.makeText(this, "putragis", Toast.LENGTH_SHORT);
         }
     }
 }
