@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PixelFormat;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -248,12 +247,12 @@ public class ChessGame extends SurfaceView {
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN: {
-                if(event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1220){
+                if(event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1240){
                     if(touch){
                         int x1, x2 = 0, y1, y2 = 0;
                         x1 = (int) (x-20)/130;
                         y1 = (int) (y-200)/130;
-                        if (event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1220) {
+                        if (event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1240) {
                             for (int ctrx = 120; ctrx <= 1160; ctrx += width) {
                                 for (int ctry = 300; ctry <= 1340; ctry += height) {
                                     if (event.getX() <= ctrx && event.getY() <= ctry && event.getX() >= ctrx - 130 && event.getY() >= ctry - 130) {
