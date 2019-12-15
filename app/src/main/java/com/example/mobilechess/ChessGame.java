@@ -58,6 +58,7 @@ public class ChessGame extends SurfaceView {
         System.out.println(FEN);
 
         board = new Board();
+        board.clear();
         board.loadFromFen(FEN);
         try {
             moves = MoveGenerator.generateLegalMoves(board);
