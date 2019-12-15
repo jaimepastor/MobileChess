@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,7 +14,6 @@ public class AddPieceActivity extends AppCompatActivity implements AdapterView.O
 
     private static final int ADDED_PIECE_RESULT_CODE = 69;
     String piece_name, piece_location, piece_side;
-    Button savePiece;
     Spinner piece_name_spinner, piece_location_spinner, piece_side_spinner;
 
     @Override
