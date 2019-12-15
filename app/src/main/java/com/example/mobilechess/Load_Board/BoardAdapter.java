@@ -28,6 +28,10 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardHolder> {
         listOfBoards.add(defaultBoard);
         notifyItemInserted(listOfBoards.size() - 1);
 
+        BoardModel hatdog = new BoardModel("1", "testing", new Board().getFen());
+        listOfBoards.add(hatdog);
+        notifyItemInserted(listOfBoards.size() - 1);
+
 
         db = DatabaseHelper.getInstance(context);
         Cursor res = db.getAllData();
@@ -35,6 +39,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardHolder> {
         if (res.getCount() > 0){
             while(res.moveToNext()){
                 listOfBoards.add(new BoardModel(res.getString(0), res.getString(1), res.getString(2)));
+                notifyItemInserted(listOfBoards.size() - 1);
             }
         }
     }

@@ -36,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + BOARDS_TABLE);
+        onCreate(db);
     }
 
     public boolean insertData(String board_name, String fen_STRING){
@@ -57,5 +58,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("SELECT * FROM " + BOARDS_TABLE, null);
         return result;
+    }
+
+    public boolean updateData(String board_id, String board_name, String fen_string){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_1, board_id);
+        contentValues.put(COL_2, board_name);
+        contentValues.put(COL_3, fen_string);
+
+        db.update(BOARDS_TABLE, contentValues, "user_ID = ?", new String[]{board_id});
+        return true;
+    }
+
+    public Integer deleteData(String user_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Integer rows = db.delete(BOARDS_TABLE, "board_ID = ?", new String[]{user_id});
+
+        return rows;
     }
 }

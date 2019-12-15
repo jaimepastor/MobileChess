@@ -2,6 +2,7 @@ package com.example.mobilechess;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -35,11 +36,12 @@ public class ChessGame extends SurfaceView {
     Board board;
     Square[][] tiles;
     MoveList moves;
+    String FEN;
 
     SurfaceHolder holder;
     ArrayList<Bitmap> pieces = new ArrayList<>();
 
-    public ChessGame(Context context) {
+    public ChessGame(Context context, Intent intent) {
         super(context);
         x = y = 0;
         mPaint = new Paint();
@@ -51,8 +53,12 @@ public class ChessGame extends SurfaceView {
         paint.setColor(Color.BLACK);
         paint.setTextSize(75);
 
+        FEN = intent.getStringExtra("FEN");
+        System.out.println(FEN);
 
         board = new Board();
+        board.clear();
+        board.loadFromFen(FEN);
         try {
             moves = MoveGenerator.generateLegalMoves(board);
         } catch (MoveGeneratorException e) {
