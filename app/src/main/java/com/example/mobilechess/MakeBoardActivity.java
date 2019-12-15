@@ -4,23 +4,33 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Piece;
+import com.github.bhlangonijr.chesslib.Square;
+
+import static com.example.mobilechess.ChessGame.scaleDown;
 
 public class MakeBoardActivity extends AppCompatActivity {
 
     private static final int ADD_PIECE_REQUEST_CODE = 90;
     private static final int ADDED_PIECE_RESULT_CODE = 69;
     private LinearLayout PieceLayout;
+    private RelativeLayout boardLayout;
     private Board board;
     private EditText board_name;
     private Integer quantity;
+    CreatedChessGame creation;
+    Board newBoard = new Board();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +40,11 @@ public class MakeBoardActivity extends AppCompatActivity {
         PieceLayout = findViewById(R.id.PieceLayout);
         board = new Board();
         board_name = findViewById(R.id.board_name);
-
+        boardLayout = findViewById(R.id.boardLayout);
+        creation = new CreatedChessGame(this);
+        boardLayout.addView(creation);
     }
+
 
     public void addPiece(View v){
         Intent intent = new Intent(this, AddPieceActivity.class);
@@ -39,7 +52,7 @@ public class MakeBoardActivity extends AppCompatActivity {
     }
 
     public void SaveToDB(View v){
-        String FEN = board.getFen();
+        String FEN = newBoard.getFen();
         String board_name = this.board_name.getText().toString();
 
         boolean result = DatabaseHelper.getInstance(this).insertData(board_name, FEN);
@@ -54,17 +67,25 @@ public class MakeBoardActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode){
-            case ADD_PIECE_REQUEST_CODE : savePiece(resultCode, data);
-                    break;
-            default : Toast.makeText(this, "whatdog", Toast.LENGTH_SHORT).show();
+        newBoard.clear();
+        if (requestCode == ADD_PIECE_REQUEST_CODE)
+        {
+            if(resultCode == ADDED_PIECE_RESULT_CODE)
+            {
+                String piece = data.getStringExtra("NAME");
+                String location = data.getStringExtra("LOCATION");
+                String pieceSide = data.getStringExtra("SIDE");
+                Toast.makeText(this, "OH YEH ADDED " + piece +" to " + location, Toast.LENGTH_SHORT).show();
+
+                newBoard.setPiece(Piece.valueOf(piece), Square.valueOf(location));
+            }
         }
     }
 
     public void savePiece(int resultCode, Intent data){
         String pieceName = data.getStringExtra("NAME");
         String pieceLocation = data.getStringExtra("LOCATION");
-        String pieceSide = data.getStringExtra("SIDE");
+
 
 
         if (resultCode == ADDED_PIECE_RESULT_CODE){
