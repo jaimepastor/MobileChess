@@ -1,11 +1,13 @@
 package com.example.mobilechess;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -23,16 +25,13 @@ import java.util.ArrayList;
 
 public class ChessGame extends SurfaceView {
 
-    Paint mPaint;
-    Game_Class game = new Game_Class();
+    Paint mPaint, paint;
     Bitmap chessboard = scaleDown(BitmapFactory.decodeResource(getResources(), R.drawable.chessboard), 1050, true);
     float x, y;
-    Board_Class board_obj;
-    boolean touched = false, moved = false, touch = false, move = false, legal = false;
+    boolean touched = false, moved = false, touch = false, move = false, legal = false, check = false, staleMate = false, checkMate = false, draw = false;
     float width = 130;
     float height = 130;
     float boardx = 20, boardy = 200;
-    Piece_Class[][] temp;
     Piece[] tempP;
     Board board;
     Square[][] tiles;
@@ -48,6 +47,11 @@ public class ChessGame extends SurfaceView {
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(10);
+
+        paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(75);
+
 
         board = new Board();
         try {
@@ -141,11 +145,6 @@ public class ChessGame extends SurfaceView {
 
 
 
-        board_obj = new Board_Class();
-
-        board_obj.set_chess_board();
-        board_obj.show_board();
-        temp = board_obj.get_board();
         tempP = board.boardToArray();
 
         holder = getHolder();
@@ -180,6 +179,19 @@ public class ChessGame extends SurfaceView {
         tempP = board.boardToArray();
         boardx = 20;
         boardy = 200;
+
+        canvas.drawText("Turn: " + board.getSideToMove().value(), 20, 100, paint);
+        if(checkMate){
+            canvas.drawText("CHECKMATE " + board.getSideToMove().flip().value() + " WINS!!", 20, 1500, paint);
+            canvas.drawText("GO BACK", 20, 1700, paint);
+            Toast.makeText(getContext(), "CHECKMATE", Toast.LENGTH_SHORT).show();
+        } else if (draw){
+            canvas.drawText("DRAW", 20, 1500, paint);
+        } else if (staleMate){
+            canvas.drawText("DRAW", 20, 1500, paint);
+        } else if(check){
+            canvas.drawText("CHECKED", 20, 175, paint);
+        }
 
         canvas.drawBitmap(chessboard,20,200,null);
         //Displaying each chess pieces
@@ -236,67 +248,83 @@ public class ChessGame extends SurfaceView {
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN: {
-                if(touch){
-                    int x1, x2 = 0, y1, y2 = 0;
-                    x1 = (int) (x-20)/130;
-                    y1 = (int) (y-200)/130;
-                    if (event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1240) {
-                        for (int ctrx = 120; ctrx <= 1160; ctrx += width) {
-                            for (int ctry = 300; ctry <= 1340; ctry += height) {
-                                if (event.getX() <= ctrx && event.getY() <= ctry && event.getX() >= ctrx - 130 && event.getY() >= ctry - 130) {
-                                    x2 = ctrx - 100;
-                                    y2 = ctry - 100;
-                                }
-                            }
-                        }
-                    }
-                    x2 = (int) (x2-20)/130;
-                    y2 = (int) (y2-200)/130;
-
-
-                    for(Move move : moves){
-                        if(new Move(tiles[x1][y1], tiles[x2][y2]).equals(move)){
-                            legal = true;
-                        }
-                    }
-
-                    if(legal){
-                        board.doMove(new Move(tiles[x1][y1], tiles[x2][y2]));
-                    }
-
-                    try {
-                        moves = MoveGenerator.generateLegalMoves(board);
-                    } catch (MoveGeneratorException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    legal = false;
-                    touch = false;
-                    touched = true;
-                    invalidate();
-                    break;
-                }else {
-                    if(!(String.valueOf(board.getPiece(tiles[(int) ((event.getX() - 20) / 130)][(int) ((event.getY() - 200) / 130)])) == "NONE")){
-                        touched = true;
-                        touch = true;
-                        x = event.getX();
-                        y = event.getY();
-
-                        if (x >= 20 && y >= 200 && x <= 1060 && y <= 1240) {
+                if(event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1240){
+                    if(touch){
+                        int x1, x2 = 0, y1, y2 = 0;
+                        x1 = (int) (x-20)/130;
+                        y1 = (int) (y-200)/130;
+                        if (event.getX() >= 20 && event.getY() >= 200 && event.getX() <= 1060 && event.getY() <= 1240) {
                             for (int ctrx = 120; ctrx <= 1160; ctrx += width) {
                                 for (int ctry = 300; ctry <= 1340; ctry += height) {
-                                    if (x <= ctrx && y <= ctry && x >= ctrx - 130 && y >= ctry - 130) {
-                                        x = ctrx - 100;
-                                        y = ctry - 100;
+                                    if (event.getX() <= ctrx && event.getY() <= ctry && event.getX() >= ctrx - 130 && event.getY() >= ctry - 130) {
+                                        x2 = ctrx - 100;
+                                        y2 = ctry - 100;
                                     }
                                 }
                             }
-                            invalidate();
-                            break;
+                        }
+                        x2 = (int) (x2-20)/130;
+                        y2 = (int) (y2-200)/130;
+
+
+                        for(Move move : moves){
+                            if(new Move(tiles[x1][y1], tiles[x2][y2]).equals(move)){
+                                legal = true;
+                            }
+                        }
+
+                        if(legal){
+                            board.doMove(new Move(tiles[x1][y1], tiles[x2][y2]));
+                        }
+
+                        try {
+                            moves = MoveGenerator.generateLegalMoves(board);
+                        } catch (MoveGeneratorException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(board.isMated()){
+                            checkMate = true;
+                        }else if(board.isKingAttacked()){
+                            check = true;
+                        }else if(board.isStaleMate()){
+                            staleMate = true;
+                        }else if(board.isDraw()){
+                            draw = true;
+                        } else{
+                            check = false;
+                        }
+
+                        legal = false;
+                        touch = false;
+                        touched = true;
+                        invalidate();
+                        break;
+                    }else {
+                        if(!(String.valueOf(board.getPiece(tiles[(int) ((event.getX() - 20) / 130)][(int) ((event.getY() - 200) / 130)])) == "NONE")){
+                            touched = true;
+                            touch = true;
+                            x = event.getX();
+                            y = event.getY();
+
+                            if (x >= 20 && y >= 200 && x <= 1060 && y <= 1240) {
+                                for (int ctrx = 120; ctrx <= 1160; ctrx += width) {
+                                    for (int ctry = 300; ctry <= 1340; ctry += height) {
+                                        if (x <= ctrx && y <= ctry && x >= ctrx - 130 && y >= ctry - 130) {
+                                            x = ctrx - 100;
+                                            y = ctry - 100;
+                                        }
+                                    }
+                                }
+                                invalidate();
+                                break;
+                            }
                         }
                     }
+                }else if(event.getX() >= 20 && event.getY() >= 1700 && checkMate){
+                    ((Activity) getContext()).finish();
                 }
+
 
             }
         }

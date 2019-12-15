@@ -14,8 +14,7 @@ import com.github.bhlangonijr.chesslib.Square;
 
 public class MainActivity extends AppCompatActivity {
 
-    ChessGame chessBoard;
-    RelativeLayout layout;
+
     TextView boardPosition;
 
 
@@ -23,12 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        chessBoard = new ChessGame(this);
-        layout = new RelativeLayout(this);
+        setContentView(R.layout.activity_main);
 
-        layout.addView(chessBoard);
-        //setContentView(R.layout.activity_main);
-        setContentView(layout);
     }
 
     public void startGame(View v){
@@ -41,11 +36,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void test(View v){
-        Board board = new Board();
-        board.clear();
-        board.setPiece(Piece.BLACK_KING, Square.A1);
-
-        boardPosition.setText(board.getFen());
-    }
 }
