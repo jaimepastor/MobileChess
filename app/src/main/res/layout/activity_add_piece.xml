@@ -34,11 +34,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/piece_location_spinner"/>
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/piece_side_spinner"/>
-
 
     <Button
         android:id="@+id/addPiece"

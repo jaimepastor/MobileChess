@@ -33,4 +33,11 @@
         android:onClick="SaveToDB"
         android:text="Save to DB"/>
 
+    <RelativeLayout
+        android:id="@+id/boardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="429dp"
+        android:orientation="vertical"></RelativeLayout>
+
+
 </LinearLayout>

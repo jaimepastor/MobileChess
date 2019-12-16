@@ -54,7 +54,7 @@ public class ChessGame extends SurfaceView {
         paint.setTextSize(75);
 
         FEN = intent.getStringExtra("FEN");
-        System.out.println(FEN);
+        System.out.println("FEN: " + FEN);
 
         board = new Board();
         board.clear();
@@ -159,6 +159,8 @@ public class ChessGame extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 board = new Board();
+                board.clear();
+                board.loadFromFen(FEN);
                 //Canvas canvas = holder.lockCanvas(null);
                 setWillNotDraw(false);
             }
