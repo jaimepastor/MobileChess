@@ -75,8 +75,10 @@ public class MakeBoardActivity extends AppCompatActivity {
 
             if (result) {
                 Toast.makeText(this, "Saved to Database!", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 Toast.makeText(this, "Not saved to Database", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
@@ -99,6 +101,7 @@ public class MakeBoardActivity extends AppCompatActivity {
                     locList.add(location);
                     Toast.makeText(this, "OH YEH ADDED " + piece + " to " + location, Toast.LENGTH_SHORT).show();
                     newBoard.setPiece(Piece.valueOf(piece), Square.valueOf(location));
+                    creation.update(Piece.valueOf(piece), Square.valueOf(location));
                 }
             }
         }

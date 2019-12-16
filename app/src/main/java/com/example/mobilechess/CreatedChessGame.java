@@ -216,5 +216,10 @@ public class CreatedChessGame extends SurfaceView {
             boardx += 75;
         }
     }
+
+    public void update(Piece piece, Square square){
+        newBoard.setPiece(piece, square);
+        invalidate();
+    }
 }
 
