@@ -59,11 +59,11 @@ public class CreatedChessGame extends SurfaceView {
         db = DatabaseHelper.getInstance(context);
         Cursor res = db.getAllData();
         newBoard.clear();
-        if (res.getCount() > 0){
-            while(res.moveToNext()){
-                newBoard.loadFromFen(res.getString(2));
-            }
-        }
+//        if (res.getCount() > 0){
+//            while(res.moveToNext()){
+//                newBoard.loadFromFen(res.getString(2));
+//            }
+//        }
 
         //Adding bitmap to each chess piece
         pieces.add(scaleDown(BitmapFactory.decodeResource(getResources(), R.drawable.black_bishop), 74, true));
