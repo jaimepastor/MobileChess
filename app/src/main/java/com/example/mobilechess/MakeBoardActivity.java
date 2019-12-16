@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.github.bhlangonijr.chesslib.Board;
 import com.github.bhlangonijr.chesslib.Piece;
+import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.Square;
 
 import java.util.ArrayList;
@@ -58,6 +59,8 @@ public class MakeBoardActivity extends AppCompatActivity {
     }
 
     public void SaveToDB(View v) {
+        Toast.makeText(this, newBoard.getSideToMove().value(), Toast.LENGTH_SHORT).show();
+        newBoard.setMoveCounter(1);
         String FEN = newBoard.getFen();
         String board_name = this.board_name.getText().toString();
 
